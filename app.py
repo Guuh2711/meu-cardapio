@@ -15,7 +15,7 @@ CORS(app)
 stripe.api_key = os.getenv("STRIPE_SECRET_KEY")
 endpoint_secret = os.getenv("STRIPE_WEBHOOK_SECRET")
 
-# Banco de dados simulado
+# Banco de dados simulado (em memória)
 pedidos_confirmados = {}
 
 @app.route("/criar-sessao", methods=["POST"])
@@ -49,7 +49,6 @@ def criar_sessao():
             cancel_url="http://localhost:5500/erro.html"
         )
 
-        # 🔄 Alterado aqui: retorna "id" em vez de "sessionId"
         return jsonify(id=session.id)
 
     except Exception as e:
@@ -122,5 +121,6 @@ def status_pedido():
         "dados": pedido["dados"]
     })
 
+# ✅ Aqui está a correção para o Render
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=int(os.getenv("PORT", 5000)))
