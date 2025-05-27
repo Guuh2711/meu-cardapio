@@ -10,6 +10,6 @@ services:
       - key: STRIPE_SECRET_KEY
         value: SUA_CHAVE_STRIPE
       - key: YOUR_DOMAIN
-        value: https://meu-cardapio.onrender.com
+        value: https://meu-cardapio-aluo.onrender.com
       - key: PORT
         value: 10000
